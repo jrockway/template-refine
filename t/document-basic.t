@@ -21,7 +21,7 @@ is $t->render, '<?xml version="1.0" encoding="utf-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"><head><title>Hello, world!</title></head><body/></html>
 ';
 
-my @frags = map { Template::Refine::Fragment->new( template => $_ ) } (
+my @frags = map { Template::Refine::Fragment->new_from_string($_) } (
     '<p>This is a test</p>',
     '<p>of the document!</p>',
 );
