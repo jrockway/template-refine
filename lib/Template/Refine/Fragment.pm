@@ -1,10 +1,6 @@
 package Template::Refine::Fragment;
 use Moose;
-use Moose::Util::TypeConstraints;
-
 use XML::LibXML;
-use HTML::Selector::XPath 'selector_to_xpath';
-use Path::Class qw(file);
 
 has fragment => (
     isa      => 'XML::LibXML::DocumentFragment',
@@ -17,14 +13,19 @@ sub new_from_dom {
     return $class->new(fragment => _extract_body($dom));
 }
 
+sub new_from_string {
+    my ($class, $template) = @_;
+    return $class->new(fragment => _parse_html($template));
+}
+
 sub new_from_file {
     my ($class, $file) = @_;
     return $class->new_from_string(file($file)->slurp);
 }
 
-sub new_from_string {
-    my ($class, $template) = @_;
-    return $class->new(fragment => _parse_html($template));
+sub _parse_html {
+    my $template = shift;
+    return _extract_body(XML::LibXML->new->parse_html_string($template));
 }
 
 sub _extract_body {
@@ -33,11 +34,6 @@ sub _extract_body {
     my (@nodes) = $xc->findnodes('/html/body/*');
 
     return XML::LibXML->new->parse_balanced_chunk(join '', map { $_->toString } @nodes);
-}
-
-sub _parse_html {
-    my $template = shift;
-    return _extract_body(XML::LibXML->new->parse_html_string($template));
 }
 
 sub _to_document {
