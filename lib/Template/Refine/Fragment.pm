@@ -51,7 +51,7 @@ sub process {
         my @nodes = $rule->selector->select($dom);
         $_->replaceNode($rule->transformer->transform($_)) for @nodes;
     }
-    
+
     return $self->new_from_dom($dom);
 }
 
