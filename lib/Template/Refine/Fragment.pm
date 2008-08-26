@@ -61,3 +61,53 @@ sub render {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Template::Refine::Fragment - represent a refine-able fragment of HTML
+
+=head1 SYNOPSIS
+
+   my $frag = Template::Refine::Fragment->new_from_string('This is <i>HTML</i>.');
+   $frag->process( ... );
+   print $frag->render;
+
+=head1 METHODS
+
+=head2 new( fragment => $fragment )
+
+Accepts one argument, fragment, which is the
+XML::LibXML::DocumentFragment that you want to operate on.  The
+constructors below are more useful.
+
+=head2 new_from_dom( $dom )
+
+Accepts an XML::LibXML::DOM object
+
+=head2 new_from_string( $html_string )
+
+Accepts an HTML string
+
+=head2 new_from_file( $filename )
+
+Accepts a filename containing HTML
+
+=head2 fragment
+
+Return the XML::LibXML::DocumentFragment that backs this object
+
+=head2 process
+
+Apply C<Template::Refine::Rule>s
+
+=head2 render
+
+Return the fragment as valid HTML
+
+=head1 BUGS
+
+=head1 AUTHOR
+
+=head1 COPYRIGHT
