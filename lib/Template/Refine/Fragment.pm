@@ -46,12 +46,7 @@ sub process {
     my ($self, @rules) = @_;
 
     my $dom = _to_document($self->fragment); # make full doc so that "/" is meaningful
-
-    for my $rule (@rules){
-        my @nodes = $rule->selector->select($dom);
-        $_->replaceNode($rule->transformer->transform($_)) for @nodes;
-    }
-
+    $_->process($dom) for @rules;
     return $self->new_from_dom($dom);
 }
 

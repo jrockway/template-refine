@@ -13,4 +13,12 @@ has 'transformer' => ( # <insert movie reference>
     required => 1,
 );
 
+# modifies DOM in place
+sub process {
+    my ($self, $dom) = @_;
+    my @nodes = $self->selector->select($dom);
+    $_->replaceNode($self->transformer->transform($_)) for @nodes;
+    return;
+}
+
 1;
