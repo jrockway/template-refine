@@ -61,21 +61,42 @@ __END__
 
 =head1 NAME
 
-Template::Refine::Fragment - represent a refine-able fragment of HTML
+Template::Refine::Fragment - represent and refine a fragment of HTML
 
 =head1 SYNOPSIS
 
-   my $frag = Template::Refine::Fragment->new_from_string('This is <i>HTML</i>.');
-   $frag->process( ... );
-   print $frag->render;
+    use Template::Refine::Fragment;
+    use Template::Refine::Processor::Rule;
+    use Template::Refine::Processor::Rule::Select::XPath;
+    use Template::Refine::Processor::Rule::Transform::Replace::Thunk;
+
+    my $frag = Template::Refine::Fragment->new_from_string(
+        '<p>Hello, <span class="world"/>.' # invalid HTML ok
+    );
+
+    my $refined = $frag->process(
+        Template::Refine::Processor::Rule->new(
+            selector => Template::Refine::Processor::Rule::Select::XPath->new(
+                pattern => '//*[@class="world"]',
+            ),
+            transformer => Template::Refine::Processor::Rule::Transform::Replace::Thunk->new(
+                replacement => sub {
+                    return 'world';
+                },
+            ),
+        ),
+    );
+
+    return $refined->render; # "<p>Hello, <span class="world">world</span>.</p>"
 
 =head1 METHODS
 
 =head2 new( fragment => $fragment )
 
 Accepts one argument, fragment, which is the
-XML::LibXML::DocumentFragment that you want to operate on.  The
-constructors below are more useful.
+XML::LibXML::DocumentFragment that you want to operate on.
+
+The constructors below are more useful.
 
 =head2 new_from_dom( $dom )
 
@@ -91,11 +112,12 @@ Accepts a filename containing HTML
 
 =head2 fragment
 
-Return the XML::LibXML::DocumentFragment that backs this object
+Return the C<XML::LibXML::DocumentFragment> that backs this object.
 
-=head2 process
+=head2 process( @rules )
 
-Apply C<Template::Refine::Rule>s
+Apply C<Template::Refine::Process::Rule>s in C<@rules> and return a
+new C<Template::Refine::Fragment>.
 
 =head2 render
 
