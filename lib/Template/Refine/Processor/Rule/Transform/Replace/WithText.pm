@@ -1,4 +1,4 @@
-package Template::Refine::Processor::Rule::Transform::Replace::Thunk;
+package Template::Refine::Processor::Rule::Transform::Replace::WithText;
 use Moose;
 
 extends 'Template::Refine::Processor::Rule::Transform::Replace';

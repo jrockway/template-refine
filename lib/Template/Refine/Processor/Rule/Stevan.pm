@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Template::Refine::Processor::Rule;
 use Template::Refine::Processor::Rule::Select::CSS;
-use Template::Refine::Processor::Rule::Transform::Replace::Thunk;
+use Template::Refine::Processor::Rule::Transform::Replace::WithText;
 
 use Sub::Exporter -setup => {
     exports => [ qw/compile/ ],
@@ -16,12 +16,12 @@ sub compile {
         my $transform = ref $replace eq 'CODE' ? $replace : sub { $replace } ;
         push @rules,
           Template::Refine::Processor::Rule->new(
-              selector => 
+              selector =>
                 Template::Refine::Processor::Rule::Select::CSS->new(
                     pattern => $select,
                 ),
-              transformer => 
-                Template::Refine::Processor::Rule::Transform::Replace::Thunk->new(
+              transformer =>
+                Template::Refine::Processor::Rule::Transform::Replace::WithText->new(
                     replacement => $transform,
                 ),
           );

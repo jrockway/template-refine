@@ -68,7 +68,7 @@ Template::Refine::Fragment - represent and refine a fragment of HTML
     use Template::Refine::Fragment;
     use Template::Refine::Processor::Rule;
     use Template::Refine::Processor::Rule::Select::XPath;
-    use Template::Refine::Processor::Rule::Transform::Replace::Thunk;
+    use Template::Refine::Processor::Rule::Transform::Replace::WithText;
 
     my $frag = Template::Refine::Fragment->new_from_string(
         '<p>Hello, <span class="world"/>.' # invalid HTML ok
@@ -79,7 +79,7 @@ Template::Refine::Fragment - represent and refine a fragment of HTML
             selector => Template::Refine::Processor::Rule::Select::XPath->new(
                 pattern => '//*[@class="world"]',
             ),
-            transformer => Template::Refine::Processor::Rule::Transform::Replace::Thunk->new(
+            transformer => Template::Refine::Processor::Rule::Transform::Replace::WithText->new(
                 replacement => sub {
                     return 'world';
                 },

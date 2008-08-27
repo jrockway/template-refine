@@ -5,7 +5,7 @@ use Test::More tests => 5;
 use Template::Refine::Fragment;
 use Template::Refine::Processor::Rule;
 use Template::Refine::Processor::Rule::Select::XPath;
-use Template::Refine::Processor::Rule::Transform::Replace::Thunk;
+use Template::Refine::Processor::Rule::Transform::Replace::WithText;
 
 my $orig = '<p>Hello, <span class="world"/>.</p>';
 my $frag = Template::Refine::Fragment->new_from_string(
@@ -20,7 +20,7 @@ my $frag2 = $frag->process(
         selector => Template::Refine::Processor::Rule::Select::XPath->new(
             pattern => '//*[@class="world"]',
         ),
-        transformer => Template::Refine::Processor::Rule::Transform::Replace::Thunk->new(
+        transformer => Template::Refine::Processor::Rule::Transform::Replace::WithText->new(
             replacement => sub {
                 return 'world';
             },
