@@ -125,6 +125,27 @@ Return the fragment as valid HTML
 
 =head1 BUGS
 
+Report to RT.
+
+=head1 VERSION CONTROL
+
+You can browse the repository at:
+
+L<http://git.jrock.us/?p=Template-Refine.git;a=summary>
+
+You can clone the repository by typing:
+
+    git clone git://git.jrock.us/Template-Refine
+
+Please e-mail me any patches.  Thanks in advance for your help!
+
 =head1 AUTHOR
 
+Jonathan Rockway C<< <jrockway@cpan.org> >>
+
 =head1 COPYRIGHT
+
+    Copyright (c) 2008 Infinity Interactive. All rights reserved This
+    program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
