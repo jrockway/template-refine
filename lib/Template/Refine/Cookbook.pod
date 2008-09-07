@@ -1,0 +1,13 @@
+=head1 NAME
+
+Template::Refine::Cookbook - cooking with C<Template::Refine>
+
+=head1 SYNOPSIS
+
+  <picture of you clicking the links below>
+
+=head1 CONTENTS
+
+L<Template::Refine::Cookbook::Interpolate|1. Variable interpolation>
+
+L<Template::Refine::Cookbook::Attributes|2. Annotating a form>
