@@ -1,6 +1,8 @@
 package Template::Refine::Fragment;
 use Moose;
 use XML::LibXML;
+use Path::Class qw(file);
+use namespace::clean -except => ['meta'];
 
 has fragment => (
     isa      => 'XML::LibXML::DocumentFragment',
