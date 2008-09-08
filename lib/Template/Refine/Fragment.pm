@@ -10,6 +10,12 @@ has fragment => (
     required => 1,
 );
 
+sub _parser {
+    my $parser = XML::LibXML->new;
+    $parser->no_network(1);
+    return $parser;
+}
+
 sub new_from_dom {
     my ($class, $dom) = @_;
     return $class->new(fragment => _extract_body($dom));
@@ -27,7 +33,7 @@ sub new_from_file {
 
 sub _parse_html {
     my $template = shift;
-    return _extract_body(XML::LibXML->new->parse_html_string($template));
+    return _extract_body(_parser()->parse_html_string($template));
 }
 
 sub _extract_body {
@@ -35,13 +41,12 @@ sub _extract_body {
     my $xc = XML::LibXML::XPathContext->new($doc);
     my (@nodes) = $xc->findnodes('/html/body/*');
 
-    return XML::LibXML->new->parse_balanced_chunk(join '', map { $_->toString } @nodes);
+    return _parser()->parse_balanced_chunk(join '', map { $_->toString } @nodes);
 }
 
 sub _to_document {
     my $frag = shift;
-    # XXX: HACK: fix this
-    return XML::LibXML->new->parse_html_string($frag->toString);
+    return _parser()->parse_html_string($frag->toString);
 }
 
 sub process {
