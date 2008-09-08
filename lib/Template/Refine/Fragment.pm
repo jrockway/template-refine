@@ -123,7 +123,7 @@ Return the C<XML::LibXML::DocumentFragment> that backs this object.
 
 =head2 process( @rules )
 
-Apply C<Template::Refine::Process::Rule>s in C<@rules> and return a
+Apply C<Template::Refine::Processor::Rule>s in C<@rules> and return a
 new C<Template::Refine::Fragment>.
 
 =head2 render
