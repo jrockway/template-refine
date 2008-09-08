@@ -59,6 +59,8 @@ sub render {
     return $self->fragment->toString;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
