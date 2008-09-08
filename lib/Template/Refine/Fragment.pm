@@ -30,7 +30,7 @@ sub new_from_file {
 
 sub _parse_html {
     my $template = shift;
-    return _extract_body($parser->parse_html_string($template));
+    return _extract_body($parser->_parse_html_string($template, undef, undef, 0));
 }
 
 sub _extract_body {
@@ -43,7 +43,7 @@ sub _extract_body {
 
 sub _to_document {
     my $frag = shift;
-    return $parser->parse_html_string($frag->toString);
+    return $parser->_parse_html_string($frag->toString, undef, undef, 0);
 }
 
 sub process {
