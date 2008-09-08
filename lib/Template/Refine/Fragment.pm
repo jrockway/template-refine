@@ -38,7 +38,7 @@ sub _extract_body {
     my $xc = XML::LibXML::XPathContext->new($doc);
     my (@nodes) = $xc->findnodes('/html/body/*');
 
-    return $parser->parse_balanced_chunk(join '', map { $_->toString } @nodes);
+    return $parser->_parse_xml_chunk(join '', map { $_->toString } @nodes);
 }
 
 sub _to_document {
