@@ -8,6 +8,6 @@ Template::Refine::Cookbook - cooking with C<Template::Refine>
 
 =head1 CONTENTS
 
-L<Template::Refine::Cookbook::Interpolate|1. Variable interpolation>
+L<1. Variable interpolation|Template::Refine::Cookbook::Interpolate>
 
-L<Template::Refine::Cookbook::Attributes|2. Annotating a form>
+L<2. Annotating a form|Template::Refine::Cookbook::Attributes>
