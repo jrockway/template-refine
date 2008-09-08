@@ -2,6 +2,7 @@ package Template::Refine::Fragment;
 use Moose;
 use XML::LibXML;
 use Path::Class qw(file);
+use List::Util qw(first);
 use namespace::clean -except => ['meta'];
 
 my $parser = XML::LibXML->new;
@@ -35,14 +36,19 @@ sub _parse_html {
 
 sub _extract_body {
     my $doc = shift;
-    my $xc = XML::LibXML::XPathContext->new($doc);
-    my (@nodes) = $xc->findnodes('/html/body/*');
+    my $html = $doc->documentElement;
+    return $html unless $html->nodeName eq 'html';
 
-    return $parser->_parse_xml_chunk(join '', map { $_->toString } @nodes);
+    my $body = first { $_->nodeName eq 'body' } $html->childNodes;
+    confess 'error finding body' unless $body;
+    my $frag = XML::LibXML::DocumentFragment->new;
+    $frag->addChild($_) for $body->childNodes;
+    return $frag;
 }
 
 sub _to_document {
     my $frag = shift;
+
     return $parser->_parse_html_string($frag->toString, undef, undef, 0);
 }
 

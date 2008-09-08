@@ -4,6 +4,7 @@ name 'Template-Refine';
 all_from 'lib/Template/Refine.pm';
 
 requires 'HTML::Selector::XPath';
+requires 'List::Util';
 requires 'Moose';
 requires 'Path::Class';
 requires 'Sub::Exporter';
