@@ -30,4 +30,4 @@ my $frag2 = $frag->process(
 
 ok $frag2;
 is $frag2->render, '<p>Hello, <span class="world">world</span>.</p>';
-is $frag->render, $orig;
+is $frag->render, $orig, 'original fragment untouched';
