@@ -1,5 +1,7 @@
 package Template::Refine::Fragment;
 use Moose;
+use Moose::Util::TypeConstraints;
+
 use XML::LibXML;
 use Path::Class qw(file);
 use List::Util qw(first);
@@ -8,10 +10,22 @@ use namespace::clean -except => ['meta'];
 my $parser = XML::LibXML->new;
 $parser->no_network(1);
 
+class_type 'XML::LibXML::DocumentFragment';
+class_type 'XML::LibXML::Node';
+
+coerce 'XML::LibXML::DocumentFragment',
+  => from 'XML::LibXML::Node',
+  => via {
+      my $f = XML::LibXML::DocumentFragment->new;
+      $f->addChild( $_->cloneNode(1) );
+      return $f;
+  };
+
 has fragment => (
     isa      => 'XML::LibXML::DocumentFragment',
     is       => 'ro',
     required => 1,
+    coerce   => 1,
 );
 
 sub new_from_dom {
