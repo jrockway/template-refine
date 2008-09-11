@@ -28,7 +28,6 @@ age.  Name and age are required.  Bio is optional.
 
 Now let's see what the designer gave us as HTML:
 
-    lang:HTML
     <form>
         <div id="name">
             <span class="label">Name</span>: <input />
@@ -48,7 +47,6 @@ selected with C<<//span[@class='label']>> or similar.
 Here's how to write a C<Template::Refine> rule for a two-stage scheme
 like this:
 
-    lang:Perl
     sub transform {
         my $frag = shift;
         for my $attribute (Person->meta->compute_all_applicable_attributes) {
@@ -99,7 +97,6 @@ The whole script (minus those two functions) looks like this:
 And the output is what you would expect from looking at the HTML and
 Moose class:
 
-    lang:HTML
     <form>
         <div id="name">
             <span class="label">Name *</span>: <input/></div>

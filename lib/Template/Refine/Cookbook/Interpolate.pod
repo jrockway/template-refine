@@ -13,7 +13,6 @@ mention in the template where C<$foo> is being interpolated.
 In reality, the designer is probably going to give you a page with
 some test data where the interpolation should be, like this:
 
-  lang:HTML
   <p>Hello, <span class="username">world</span>.</p>
 
 The C<username> class is there because the designer always wants
@@ -26,7 +25,6 @@ We start by loading C<Template::Refine>.  The main entry point is
 currently C<Template::Refine::Fragment>.  This class represents a
 document fragment that can be refined.
 
-    lang:Perl
     use Template::Refine::Fragment;
     use Template::Refine::Utils qw(simple_replace replace_text);
 
@@ -92,12 +90,10 @@ our HTML back:
 
 That will then print:
 
-  lang:HTML
   <p>Hello, <span class="username">Test User</span>.</p>
 
 And that's that.  The basic flow is:
 
-  lang:Perl
   Template::Refine::Fragment->
     new( ... )->
     process( simple_replace { ... } '//x/path' )->
