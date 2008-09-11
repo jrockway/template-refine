@@ -48,13 +48,17 @@ sub _extract_body {
 
 sub _to_document {
     my $frag = shift;
-
-    return $parser->_parse_html_string($frag->toString, undef, undef, 0);
+    my $doc = XML::LibXML::Document->new;
+    my $html = XML::LibXML::Element->new('html');
+    my $body = XML::LibXML::Element->new('body');
+    $doc->setDocumentElement( $html );
+    $html->addChild( $body );
+    $body->addChild( $frag->cloneNode(1) );
+    return $doc;
 }
 
 sub process {
     my ($self, @rules) = @_;
-
     my $dom = _to_document($self->fragment); # make full doc so that "/" is meaningful
     $_->process($dom) for @rules;
     return $self->new_from_dom($dom);
