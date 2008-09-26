@@ -41,7 +41,7 @@ sub css($){
 
 sub xpath($){
     my $selector = shift;
-    return Template::Refine::Processor::Rule::Select::CSS->new(
+    return Template::Refine::Processor::Rule::Select::XPath->new(
         pattern => $selector,
     );
 }
