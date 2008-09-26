@@ -1,12 +1,9 @@
 use strict;
 use warnings;
-use Test::More tests => 4;
+use Test::More tests => 3;
 use Test::Exception;
 
-use Template::Refine::Fragment;
-BEGIN {
-    use_ok('Template::Refine::Utils', qw(simple_replace replace_text));
-}
+use Template::Refine;
 
 my $f = Template::Refine::Fragment->new_from_string('<p>Hello</p>');
 isa_ok $f, 'Template::Refine::Fragment';
@@ -18,7 +15,7 @@ lives_ok {
         simple_replace {
             my $n = shift;
             replace_text $n, 'Goodbye'
-        } '//p',
+        } css('p'),
     )->render;
 } 'process / replace / text / render stage lives';
 

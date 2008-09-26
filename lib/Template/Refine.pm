@@ -1,6 +1,16 @@
 package Template::Refine;
+use strict;
+use warnings;
 
 our $VERSION = '0.02';
+
+use Template::Refine::Utils;
+use Template::Refine::Fragment;
+
+sub import {
+    @_ = ('Template::Refine::Utils', ':all');
+    goto \&Template::Refine::Utils::import;
+}
 
 1;
 
@@ -10,12 +20,13 @@ __END__
 
 Template::Refine - refine HTML
 
-=head1 DETAILS
+=head1 DESCRIPTION
 
 See L<Template::Refine::Fragment>, it's currently the main entry
-point.
+point.  You can also read the L<Template::Refine::Cookbook>.
 
-You can also read the L<Template::Refine::Cookbook>.
+If you C<use> this module, everything in C<Template::Refine::Utils> will
+be imported into your namespace.  Sugary!
 
 =head1 AUTHOR
 
