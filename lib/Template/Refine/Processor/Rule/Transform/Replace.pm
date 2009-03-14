@@ -11,7 +11,7 @@ has 'replacement' => (
 
 sub transform {
     my ($self, $node) = @_;
-    return $self->replacement->($node);
+    return $self->replacement->($node->cloneNode(1)); # always work on a copy
 }
 
 1;
