@@ -40,7 +40,7 @@ sub new_from_string {
 
 sub new_from_file {
     my ($class, $file) = @_;
-    return $class->new_from_string(file($file)->slurp);
+    return $class->new_from_string(scalar file($file)->slurp);
 }
 
 sub _parse_html {
